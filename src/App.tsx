@@ -11,6 +11,7 @@ import {
   ProtectedRoute,
   AllBoardsPage,
   UserProfilePage,
+  EditBoardPage,
 } from "./pages";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
             }
           >
             <Route index element={<AllBoardsPage />} />
+            <Route path="/board" element={<EditBoardPage />} />
             <Route path="/board/:boardId" element={<TaskPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
           </Route>

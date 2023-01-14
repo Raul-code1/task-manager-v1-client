@@ -14,7 +14,6 @@ const initialState: UserSliceState = {
   user: getUserLocalStorage(),
 };
 
-//*Testing user testing@gmail.com password: testing
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -22,7 +21,7 @@ export const userSlice = createSlice({
     logoutUser: (state, action: PayloadAction) => {
       deleteUserLocalStorage();
       state.user = null;
-      toast("Login out");
+      toast("Logging out");
     },
   },
   extraReducers: (builder) => {

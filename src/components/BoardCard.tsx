@@ -1,31 +1,46 @@
 import styled from "styled-components";
-import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
+import { IoMdAddCircle } from "react-icons/io";
+import { useAppDispatch } from "../utils/storeHooks";
+
+import {
+  setActiveBoard,
+  setIsEditingToTrue,
+} from "../features/boards/boardSlice";
+import { Link } from "react-router-dom";
 
 type Props = {
   name: string;
-  color: string;
+  color?: string;
+  _id: string;
 };
 
-const BoardCard = ({ name, color }: Props) => {
+const BoardCard = ({ name, color, _id }: Props) => {
+
+  const dispatch = useAppDispatch();
+
+  const handleEdiButton=(name:string,id:string)=>{
+    dispatch(setIsEditingToTrue())
+    dispatch(setActiveBoard({name,id}))
+  }
+ 
   return (
     <Wrapper>
       <h4 style={{ color }}>{name}</h4>
-      {/* //todo:delete functions */}
-      <button
-        type="button"
-        className="trash-icon-btn"
-        onClick={() => console.log("delete board")}
+      <Link
+        to={`/board/${_id}`}
+        className="add-icon-btn"
+        onClick={() =>{}}
       >
-        <BsFillTrashFill />
-      </button>
-      <button
-        type="button"
+        <IoMdAddCircle />
+      </Link>
+      <Link 
+        to={`/board`}
         className="edit-icon-btn"
-        onClick={() => console.log("edit board")}
+        onClick={()=>handleEdiButton(name,_id)}
       >
         <AiFillEdit />
-      </button>
+      </Link>
     </Wrapper>
   );
 };
@@ -36,33 +51,30 @@ const Wrapper = styled.article`
   border-radius: var(--radius);
   position: relative;
   text-align: center;
-  padding: 1.875rem;
   background-color: var(--gray-900);
   box-shadow: var(--box-shadow);
-  transition: var(--transition);
-  &:hover{
-    scale: 1.1;
-  }  
+  padding: 1.5625rem 5px;
 
-  cursor: pointer;
   h4 {
     font-size: 1.5625rem;
   }
 
-  .trash-icon-btn,.edit-icon-btn {
+  .add-icon-btn,
+  .edit-icon-btn {
     border: none;
     background-color: transparent;
     position: absolute;
     color: var(--gray-50);
     cursor: pointer;
+    bottom: 0;
   }
 
-  .trash-icon-btn{
-    right: 2%;
-
+  .add-icon-btn {
+    right: 3px;
+    font-size: 20px;
   }
-  .edit-icon-btn{
-    left: 2%;
+  .edit-icon-btn {
+    left: 3px;
   }
 
   @media (min-width: 1100px) {

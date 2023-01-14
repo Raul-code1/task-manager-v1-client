@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 
 import { InputComponent } from "./index";
-import { useAppDispatch } from "../utils/storeHooks";
-import { closeBoardModal } from "../features/boards/boardSlice";
+import { useAppDispatch, useAppSelector } from '../utils/storeHooks';
+import { createBoard, updateBoard } from "../features/boards/boardThunk";
 
 const AddBoardModal = () => {
+
+  const { activeBoard,isEditing }=useAppSelector((store)=>store.board)
   const dispatch = useAppDispatch();
-  const [boardData, setBoardData] = useState<String>("");
+  const [boardData, setBoardData] = useState<string>("");
   const [showFormMessage, setShowFormMessage] = useState(false);
 
   const handleChangeBoard = ({
@@ -22,23 +24,39 @@ const AddBoardModal = () => {
       setShowFormMessage(true);
       return;
     }
-    /* //todo:Dispatch create board */
-    /* //todo:and update modal*/
+
+    if (isEditing) {
+      dispatch(updateBoard({name:boardData}));
+      setShowFormMessage(false);
+      return
+    }
+    
+    dispatch(createBoard({name:boardData}))
     setShowFormMessage(false);
-    dispatch(closeBoardModal());
   };
+  
+
+  useEffect(() => {
+    if (isEditing) {
+      setBoardData(activeBoard ||'');
+    }else{
+      setBoardData('')
+    }
+    
+  }, [activeBoard,isEditing])
+  
 
   return (
     <Wrapper className="animate__animated animate__fadeIn">
       <div className="add-board-form-container">
-        <button onClick={()=>dispatch(closeBoardModal())} type="button" className="close-modal-btn">
+        <button onClick={()=>{}} type="button" className="close-modal-btn">
           X
         </button>
         <form onSubmit={handleSubmit}>
           <h3>Add new Board</h3>
           <InputComponent
             name="newBoard"
-            labelText="New Board"
+            labelText="Board"
             type="text"
             value={boardData}
             onChange={handleChangeBoard}

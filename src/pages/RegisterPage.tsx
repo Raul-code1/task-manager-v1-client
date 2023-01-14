@@ -2,14 +2,14 @@ import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from '../utils/storeHooks';
 
 import registerPageImg from "../assets/register-page-img.jpg";
 import { InputComponent } from "../components";
 import { loginUser, registerUser } from "../features/user/userThunk";
 import { UserState } from "../ts";
-import { useAppDispatch, useAppSelector } from '../utils/storeHooks';
 
-const initialState ={
+const initialState:UserState ={
   name: "",
   email: "",
   password: "",
@@ -20,9 +20,9 @@ const initialState ={
 
 const RegisterPage = () => {
 
-  const { user }=useAppSelector((state)=>state.user)
   const dispatch=useAppDispatch();
   const navigate=useNavigate();
+  const { user }=useAppSelector((state)=>state.user)
 
   const [userData, setUserData] = useState<UserState>(initialState);
 
@@ -41,17 +41,17 @@ const RegisterPage = () => {
     }    
     
     dispatch(registerUser(userData))
-   if (user){
+    
+ /* //?Just do this if someone put invalid values in not member form
+    if (user){
      setUserData({...initialState,isMember:userData.isMember})
     }else{
       setUserData({...userData,isMember:userData.isMember})
-    }
+    } */
 
   };
   
-  const handleChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = ({ target}: React.ChangeEvent<HTMLInputElement>): void => {
     setUserData({
       ...userData,
       [target.name]: target.value,

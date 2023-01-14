@@ -2,14 +2,14 @@ import { AppDispatch } from '../store';
 import { ErrorMessage } from './interfaces';
 
 
-/*//!Types for  user  */
+/*//Types for  user  */
 
 export  type UserState={
     name:string,
     email:string,
     password?:string,
     isMember?:boolean | null ,
-    lastName:string,
+    lastName:any,
     token:string | null
 }
 
@@ -20,18 +20,18 @@ export type UserProfileForm={
     lastName?:string ,
 }
 
-//!Types for props 
+//Types for props 
 
 /* //* Type for inputs components props */
 export type InputProps={
     name:string,
-    labelText?:string,
+    labelText?:string | null,
     type:string,
     value:any,
     onChange:(e:React.ChangeEvent<HTMLInputElement>)=>void
 }
 
-//!Slices state types
+//Slices state types
 
 /* //* type for User slice state    */
 export type UserSliceState = {
@@ -42,9 +42,9 @@ export type UserSliceState = {
 export type BoardsState = {
     isLoading:boolean,
     boards: Board[],
-    activeBoard:Board | null,
+    activeBoard:string | null,
     isEditing:boolean,
-    isModalOpen:boolean,
+    boardId:string | null,
 }
 
 
@@ -59,7 +59,7 @@ export type Board = {
     __v:       number;
 }
 
-//!Redux toolkit types
+//Redux toolkit types
 
 
 /*//* ThunkApi type */

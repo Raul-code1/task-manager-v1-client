@@ -31,7 +31,7 @@ html {
   --radius: .5rem;
   --max-width: 1200px;
   --letter-spacing: .0625rem;
-  --box-shadow: 11px 20px 36px -15px rgba(0,0,0,0.75);
+  --box-shadow: 11px 20px 36px -21px rgba(0,0,0,0.75);
 
   /* Break points that i used 
 
@@ -118,9 +118,18 @@ h6 {
 
 /* home page content */
 .section{
-  padding: 1.25rem;
+  width: 90%;
+  margin: 0 auto;
 }
 
+.content-section{
+  overflow-y: scroll;
+
+
+}
+::-webkit-scrollbar{
+  background-color: var(--gray-50);
+}
 
 
 
