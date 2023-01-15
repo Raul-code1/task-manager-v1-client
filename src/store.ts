@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { boardSlice } from "./features/boards/boardSlice";
 
 import { userSlice } from "./features/user/userSlice";
+import { taskSlice } from "./features/tasks/taskSlice";
+import { boardSlice } from "./features/boards/boardSlice";
 
  const store =configureStore({
     reducer:{
         user:userSlice.reducer,
-        board:boardSlice.reducer
+        board:boardSlice.reducer,
+        task:taskSlice.reducer,
     }
 })
 

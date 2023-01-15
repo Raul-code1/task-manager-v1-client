@@ -5,5 +5,5 @@ export { default as RegisterPage } from './RegisterPage';
 export { default as UserProfilePage } from './UserProfilePage';
 export { default as AllBoardsPage } from './boards/AllBoardsPage';
 export { default as EditBoardPage } from './boards/EditBoardPage';
-export * from './index';
+export { default as EditTaskPage } from './tasks/EditTaskPage';
 export { default as TaskPage } from './tasks/TaskPage';

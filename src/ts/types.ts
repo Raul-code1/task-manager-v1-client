@@ -2,16 +2,6 @@ import { AppDispatch } from '../store';
 import { ErrorMessage } from './interfaces';
 
 
-/*//Types for  user  */
-
-export  type UserState={
-    name:string,
-    email:string,
-    password?:string,
-    isMember?:boolean | null ,
-    lastName:any,
-    token:string | null
-}
 
 
 export type UserProfileForm={
@@ -33,7 +23,7 @@ export type InputProps={
 
 //Slices state types
 
-/* //* type for User slice state    */
+/* //* type  slices state    */
 export type UserSliceState = {
     isLoading:boolean,
     user:UserState | null,
@@ -42,14 +32,36 @@ export type UserSliceState = {
 export type BoardsState = {
     isLoading:boolean,
     boards: Board[],
-    activeBoard:string | null,
+    activeBoard:string,
     isEditing:boolean,
     boardId:string | null,
 }
 
+export type TaskState={
+    isLoading:boolean,
+    tasks: TaskElement[];
+    statusOptions:string[];
+    taskId:string;
+    isEditing:boolean;
+    activeTask:TaskElement | null;
+    boardIdForTask?:string| null;
+}
+
+
+/*//Types for  user  */
+
+export  type UserState={
+    name:string,
+    email:string,
+    password?:string,
+    isMember?:boolean | null ,
+    lastName:any,
+    token:string | null
+}
 
 
 
+/*//Types for  board  */
 export type Board = {
     _id:       string;
     name:      string;
@@ -58,6 +70,23 @@ export type Board = {
     updatedAt: string;
     __v:       number;
 }
+
+/*Types for tasks */
+
+export type TaskElement= {
+    _id:         string;
+    title:       string;
+    description: null | string;
+    status:      string;
+    boardId:     string;
+    createdBy:   string;
+    createdAt:   string;
+    updatedAt:   string;
+    __v:         number | null;
+}
+
+
+
 
 //Redux toolkit types
 

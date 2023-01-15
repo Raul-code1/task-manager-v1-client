@@ -1,8 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { useAppDispatch } from "../utils/storeHooks";
 
-import { logoutUser } from "../features/user/userSlice";
 import { NavBar } from "../components";
 
 const HomePage = () => {

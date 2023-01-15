@@ -1,15 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
-
-import { InputComponent } from "../../components";
-import { useAppSelector, useAppDispatch } from '../../utils/storeHooks';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createBoard, updateBoard } from "../../features/boards/boardThunk";
+
+import { useAppSelector, useAppDispatch } from '../../utils/storeHooks';
+import { InputComponent } from "../../components";
+import { createBoard, updateBoard,deleteBoard } from "../../features/boards/boardThunk";
 
 const EditBoardPage = () => {
+  const navigate = useNavigate()
   const dispatch=useAppDispatch();
   const { activeBoard, isEditing } = useAppSelector((store) => store.board)
-  const [board, setBoard] = useState<string | null>(activeBoard);
+  const [board, setBoard] = useState<string>(activeBoard);
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const value = target.value;
@@ -26,9 +28,20 @@ const EditBoardPage = () => {
         dispatch(createBoard({name:board}))
     } 
 
+    setTimeout(() => {
+      navigate('/')
+    }, 2000);
     
 
   };
+
+  const handleDeleteBoard=()=>{
+    dispatch(deleteBoard({}))
+    setBoard('');
+    setTimeout(() => {
+      navigate('/')
+    }, 2000);
+  }
 
   return (
     <Wrapper className="section">
@@ -48,7 +61,7 @@ const EditBoardPage = () => {
             </button>
           </form>
           {isEditing && (
-            <button type="button" className=" delete-btn">
+            <button type="button" className=" delete-btn" onClick={handleDeleteBoard} >
               Delete
             </button>
           )}

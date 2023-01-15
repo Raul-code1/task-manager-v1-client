@@ -125,7 +125,6 @@ h6 {
 .content-section{
   overflow-y: scroll;
 
-
 }
 ::-webkit-scrollbar{
   background-color: var(--gray-50);

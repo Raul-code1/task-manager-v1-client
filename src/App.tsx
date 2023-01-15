@@ -12,6 +12,7 @@ import {
   AllBoardsPage,
   UserProfilePage,
   EditBoardPage,
+  EditTaskPage,
 } from "./pages";
 
 const App = () => {
@@ -29,7 +30,8 @@ const App = () => {
           >
             <Route index element={<AllBoardsPage />} />
             <Route path="/board" element={<EditBoardPage />} />
-            <Route path="/board/:boardId" element={<TaskPage />} />
+            <Route path="/task" element={<EditTaskPage />} />
+            <Route path="/board/:boardIdParam" element={<TaskPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
           </Route>
           <Route path="/*" element={<ErrorPage />} />

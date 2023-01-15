@@ -26,7 +26,7 @@ export const getAllBoard = createAsyncThunk<
     }: any = error;
 
     if (status === 401) {
-      thunkApi.dispatch(logoutUser())
+      thunkApi.dispatch(logoutUser());
       return thunkApi.rejectWithValue(data.msg);
     }
     return thunkApi.rejectWithValue(data.msg);
@@ -35,7 +35,7 @@ export const getAllBoard = createAsyncThunk<
 
 export const createBoard = createAsyncThunk<
   Board,
-  { name: string |null },
+  { name: string },
   {
     state: RootState;
     dispatch: AppDispatch;
@@ -43,68 +43,86 @@ export const createBoard = createAsyncThunk<
   }
 >("board/createBoard", async (name, thunkApi) => {
   try {
-    const { data } = await customApi.post(
-      "/board",
-       name,
-      {
-        headers: {
-          authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
-        },
-      }
-    );
+    const { data } = await customApi.post("/board", name, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
 
-      const {board}=data;
-      return board;
-
+    const { board } = data;
+    return board;
   } catch (error) {
     console.log(error);
     const {
       response: { data, status },
     }: any = error;
     if (status === 401) {
-      thunkApi.dispatch(logoutUser())
+      thunkApi.dispatch(logoutUser());
       return thunkApi.rejectWithValue(data.msg);
     }
     return thunkApi.rejectWithValue(data.msg);
   }
 });
 
-//todo:updateBoard
-
- export const updateBoard=createAsyncThunk<  Board,
- { name: string | null },
- {
-   state: RootState;
-   dispatch: AppDispatch;
-   rejectValue: string;
- }>('board/updateBoard',async (name,thunkApi)=>{
-    
-  const { boardId }=thunkApi.getState().board
-
-
-  try { 
-    const {data}=await customApi.patch(`/board/${boardId}`,name,{
-      headers:{
-        authorization:`Bearer ${thunkApi.getState().user.user?.token}`
-      }
-    })
-
-    
-    const {board}=data;
-    return board;
-
-  } catch (error) {
-    console.log(error);
-    return thunkApi.rejectWithValue('Error')
+export const updateBoard = createAsyncThunk<
+  Board,
+  { name: string },
+  {
+    state: RootState;
+    dispatch: AppDispatch;
+    rejectValue: string;
   }
+>("board/updateBoard", async (name, thunkApi) => {
+  const { boardId } = thunkApi.getState().board;
 
+  try {
+    const { data } = await customApi.patch(`/board/${boardId}`, name, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
 
+    const { board } = data;
+    return board;
+  } catch (error) {
+    const {
+      response: { data, status },
+    }: any = error;
+    if (status === 401) {
+      thunkApi.dispatch(logoutUser());
+      return thunkApi.rejectWithValue(data.msg);
+    }
+    return thunkApi.rejectWithValue(data.msg);
+  }
+});
 
-})
- 
+export const deleteBoard = createAsyncThunk<
+  { msg: string },
+  {},
+  {
+    state: RootState;
+    dispatch: AppDispatch;
+    rejectValue: string;
+  }
+>("board/deleteBoard", async (_, thunkApi) => {
+  const { boardId } = thunkApi.getState().board;
 
+  try {
+    const { data } = await customApi.delete(`/board/${boardId}`, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
 
-
-
-//todo:deleteBoard
-
+    return data;
+  } catch (error) {
+    const {
+      response: { data, status },
+    }: any = error;
+    if (status === 401) {
+      thunkApi.dispatch(logoutUser());
+      return thunkApi.rejectWithValue(data.msg);
+    }
+    return thunkApi.rejectWithValue(data.msg);
+  }
+});

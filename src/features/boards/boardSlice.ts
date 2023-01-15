@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import { BoardsState } from "../../ts/types";
-import { getAllBoard, createBoard, updateBoard } from "./boardThunk";
+import { getAllBoard, createBoard, updateBoard,deleteBoard } from "./boardThunk";
 
 const initialState: BoardsState = {
   isLoading: false,
@@ -64,7 +64,19 @@ export const boardSlice = createSlice({
       .addCase(updateBoard.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
-      });
+      })
+      .addCase(deleteBoard.pending,(state)=>{
+        state.isLoading = true;
+      })
+      .addCase(deleteBoard.fulfilled,(state,{payload})=>{
+        const {msg}=payload
+        state.isLoading = false;
+        toast.success(msg);
+      })
+      .addCase(deleteBoard.rejected,(state,{payload})=>{
+        state.isLoading = false;
+        toast.success(payload);
+      })
   },
 });
 
