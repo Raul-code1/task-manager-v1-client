@@ -35,14 +35,14 @@ const TaskPage = () => {
   if (tasks.length === 0) {
     return (
       <Wrapper className="section">
-        <Link to={'/'} className="add-task-btn btn  " onClick={handleAddBtn} >Add new task</Link>
+        <Link to={'/task'} className="add-task-btn btn  " onClick={handleAddBtn} >Add new task</Link>
         <h1 style={{paddingTop:20}} >Yo don`t have any tasks</h1>
       </Wrapper>
     );
   }
 
   return (
-    <Wrapper className="section">
+    <Wrapper className="section animate__animated animate__fadeIn ">
       <Link to={'/task'} className="add-task-btn btn " onClick={handleAddBtn} >Add new task</Link>
       <div className="task-page-container">
         {statusOptions.map((item, index) => {
@@ -58,6 +58,7 @@ export default TaskPage;
 const Wrapper = styled.section`
   min-height: 100%;
   overflow-x: scroll;
+  overflow-y: scroll;
   position: relative;
   padding-top: 10px;
   .task-page-container {

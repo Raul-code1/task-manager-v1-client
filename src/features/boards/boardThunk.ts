@@ -19,6 +19,8 @@ export const getAllBoard = createAsyncThunk<
     });
 
     const { boards } = data;
+    
+    
     return boards;
   } catch (error) {
     const {

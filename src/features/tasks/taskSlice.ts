@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TaskElement, TaskState } from '../../ts';
-import { getAllTasks } from './taskThunk';
+import { getAllTasks, createTask, editTask, deleteTask } from './taskThunk';
 import { toast } from 'react-toastify';
 
 const initialState:TaskState={
@@ -47,6 +47,42 @@ export const taskSlice = createSlice({
         .addCase(getAllTasks.rejected,(state,{payload})=>{
             state.isLoading=false;
             toast.error(payload);
+        })
+        .addCase(createTask.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(createTask.fulfilled,(state,{payload})=>{
+            const { title }=payload;
+            state.isLoading=false;
+            toast.success(`Created ${title}`);
+        })
+        .addCase(createTask.rejected,(state,{payload})=>{
+            state.isLoading=false;
+            toast.error(payload);
+        })
+        .addCase(editTask.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(editTask.fulfilled,(state,{payload})=>{
+            const { title }=payload;
+            state.isLoading=false;
+            toast.success(`${title} updated`);
+        })
+        .addCase(editTask.rejected,(state,{payload})=>{
+            state.isLoading=false;
+            toast.success(payload);
+        })
+        .addCase(deleteTask.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(deleteTask.fulfilled,(state,{payload})=>{
+            const {msg}=payload
+            state.isLoading=false;
+            toast.success(msg)
+        })
+        .addCase(deleteTask.rejected,(state,{payload})=>{
+            state.isLoading=false;
+            toast.success(payload)
         })
     }
 });

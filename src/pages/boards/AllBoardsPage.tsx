@@ -46,7 +46,7 @@ const AllBoardsPage = () => {
   }
 
   return (
-    <Wrapper className="section content-section ">
+    <Wrapper className="section content-section animate__animated animate__fadeIn">
       <div className="all-boards-container">
         <h1>All your boards</h1>
         <div className="add-board-btn">

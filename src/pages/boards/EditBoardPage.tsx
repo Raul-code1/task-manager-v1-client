@@ -88,20 +88,7 @@ const Wrapper = styled.section`
         cursor: pointer;
       }
     }
-    .delete-btn {
-      cursor: pointer;
-      padding: 0.25rem 1.5rem;
-      margin-top: 1.25rem;
-      background-color: red;
-      color: var(--gray-50);
-      border: 1px solid red;
-      border-radius: var(--radius);
-      transition: var(--transition);
-      &:hover {
-        background-color: var(--gray-50);
-        color: red;
-      }
-    }
+    
   }
 
   @media (min-width: 767px) {

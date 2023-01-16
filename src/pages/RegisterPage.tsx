@@ -73,7 +73,7 @@ const RegisterPage = () => {
   
 
   return (
-    <Wrapper>
+    <Wrapper className="animate__animated animate__fadeIn " >
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h1>{isMemberHelper}</h1>

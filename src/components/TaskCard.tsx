@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   border-radius: var(--radius);
   box-shadow: var(--box-shadow);
   text-align: center;
+  margin-top: 20px;
   .bar-color {
     width: 50%;
     height: 4px;
